@@ -3,13 +3,13 @@ var writing = false;
 
 async function read() {
     await ndef.scan();
-    console.log("> Scan started");
+    console.log("Scan started");
     ndef.addEventListener("readingerror", () => {
         alert("Could not read NFC tag.")
     });
 
     ndef.addEventListener("reading", ({ message, serialNumber }) => {
-        if (writing) {
+        if (!writing) {
             console.log(message.records)
             var record = message.records[message.records.length - 1]
             if (record.recordType === "text") {
