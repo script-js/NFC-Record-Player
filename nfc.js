@@ -14,17 +14,11 @@ async function read() {
 
         ndef.addEventListener("reading", ({ message, serialNumber }) => {
             console.log(message)
+            if (confirm("Would you like to write?")) {
+                ndef.write("test")
+            }
         });
     } catch (error) {
         console.log("Argh! " + error);
     }
-}
-
-function write() {
-    ndef.addEventListener(
-        "reading",
-        (event) => {
-            // Check if we want to write to this tag, or reject.
-            ndef.write("test")
-        }, { once: true })
 }
