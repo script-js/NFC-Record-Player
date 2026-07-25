@@ -9,7 +9,6 @@ async function read() {
         });
 
         ndef.addEventListener("reading", ({ message, serialNumber }) => {
-            alert(`> Records: (${message.records.length})`);
             console.log(message)
         });
     } catch (error) {
@@ -20,8 +19,7 @@ async function read() {
 function write() {
   var ignoreRead = true;
   var data = "test"
-  return new Promise((resolve, reject) => {
-    ndef.addEventListener(
+  ndef.addEventListener(
       "reading",
       (event) => {
         // Check if we want to write to this tag, or reject.
@@ -31,6 +29,5 @@ function write() {
           .finally(() => (ignoreRead = false));
       },
       { once: true },
-    );
-  });
+  );
 }
