@@ -1,4 +1,5 @@
 const ndef = new NDEFReader();
+var writing = false;
 
 async function read() {
     await ndef.scan();
@@ -8,25 +9,29 @@ async function read() {
     });
 
     ndef.addEventListener("reading", ({ message, serialNumber }) => {
-        console.log(message.records)
-        var record = message.records[message.records.length - 1]
-        if (record.recordType === "text") {
-            var decoder = new TextDecoder(record.encoding);
+        if (writing) {
+            console.log(message.records)
+            var record = message.records[message.records.length - 1]
+            if (record.recordType === "text") {
+                var decoder = new TextDecoder(record.encoding);
 
-            var textData = decoder.decode(record.data);
+                var textData = decoder.decode(record.data);
 
-            console.log(`Text content: ${textData}`);
-            console.log(`Language code: ${record.lang}`);
-            alert(textData)
+                console.log(`Text content: ${textData}`);
+                console.log(`Language code: ${record.lang}`);
+                alert(textData)
+            }
         }
     });
 }
 
 function writeTag(text) {
+    writing = true;
     console.log("Waiting to write...")
     ndef.addEventListener("reading", ({ message, serialNumber }) => {
         console.log("Writing " + text)
         ndef.write(text)
         alert("Write Complete")
+        writing = false;
     }, { once: true });
 }
