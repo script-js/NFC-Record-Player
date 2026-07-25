@@ -1,9 +1,13 @@
+try {
+    const ndef = new NDEFReader();
+} catch (err) {
+    alert(err)
+}
+
 async function read() {
     try {
-        const ndef = new NDEFReader();
         await ndef.scan();
         console.log("> Scan started");
-
         ndef.addEventListener("readingerror", () => {
             console.log("Argh! Cannot read data from the NFC tag. Try another one?");
         });
@@ -17,12 +21,10 @@ async function read() {
 }
 
 function write() {
-    var ignoreRead = true;
-    var data = "test"
     ndef.addEventListener(
         "reading",
         (event) => {
             // Check if we want to write to this tag, or reject.
-            ndef.write(data)
+            ndef.write("test")
         }, { once: true })
 }
