@@ -17,17 +17,12 @@ async function read() {
 }
 
 function write() {
-  var ignoreRead = true;
-  var data = "test"
-  ndef.addEventListener(
-      "reading",
-      (event) => {
-        // Check if we want to write to this tag, or reject.
-        ndef
-          .write(data)
-          .then(resolve, reject)
-          .finally(() => (ignoreRead = false));
-      },
-      { once: true },
-  );
+    var ignoreRead = true;
+    var data = "test"
+    ndef.addEventListener(
+        "reading",
+        (event) => {
+            // Check if we want to write to this tag, or reject.
+            ndef.write(data)
+        }, { once: true })
 }
