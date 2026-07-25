@@ -4,11 +4,12 @@ async function read() {
     await ndef.scan();
     console.log("> Scan started");
     ndef.addEventListener("readingerror", () => {
-        console.log("Argh! Cannot read data from the NFC tag. Try another one?");
+        alert("Could not read NFC tag.")
     });
 
     ndef.addEventListener("reading", ({ message, serialNumber }) => {
         console.log(message.records)
+        var record = message.records[message.records.length - 1]
         if (record.recordType === "text") {
             var decoder = new TextDecoder(record.encoding);
 
