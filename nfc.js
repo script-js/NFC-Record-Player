@@ -8,9 +8,7 @@ async function read() {
     });
 
     ndef.addEventListener("reading", ({ message, serialNumber }) => {
-        console.log(message)
-        if (confirm("Would you like to write?")) {
-            ndef.write("test")
-        }
+        console.log(message.records)
+        ndef.write("test")
     });
 }
