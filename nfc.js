@@ -1,4 +1,4 @@
-async function read() {
+function read() {
     try {
         const ndef = new NDEFReader();
         await ndef.scan();
@@ -16,4 +16,3 @@ async function read() {
         console.log("Argh! " + error);
     }
 }
-read()
