@@ -9,8 +9,8 @@ function read() {
         });
 
         ndef.addEventListener("reading", ({ message, serialNumber }) => {
-            console.log(`> Serial Number: ${serialNumber}`);
-            console.log(`> Records: (${message.records.length})`);
+            alert(`> Serial Number: ${serialNumber}`);
+            alert(`> Records: (${message.records.length})`);
         });
     } catch (error) {
         console.log("Argh! " + error);
