@@ -22,9 +22,11 @@ async function read() {
     });
 }
 
-function write(text) {
+function writeTag(text) {
+    console.log("Waiting to write...")
     ndef.addEventListener("reading", ({ message, serialNumber }) => {
         console.log("Writing " + text)
         ndef.write(text)
-    });
+        alert("Write Complete")
+    }, { once: true });
 }
