@@ -17,8 +17,9 @@ async function read() {
     }
 }
 
-function write(data) {
-  ignoreRead = true;
+function write() {
+  var ignoreRead = true;
+  var data = "test"
   return new Promise((resolve, reject) => {
     ndef.addEventListener(
       "reading",
