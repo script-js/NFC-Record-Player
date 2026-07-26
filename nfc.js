@@ -57,4 +57,5 @@ function writeTag(provider, uri) {
           display.innerText = "WRITE COMPLETE"
         }
     }, { once: true });
+    alert("Ready to write\n Hold NFC tag on the back of the device")
 }
