@@ -52,7 +52,7 @@ function powerOn(btn) {
 }
 
 function clickFeedback() {
-    navigator.vibrate(100);
+    navigator.vibrate(50);
     click.play()
 }
 
