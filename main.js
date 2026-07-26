@@ -1,18 +1,23 @@
 var playing = false;
 
 function startPlayingUI(cover) {
-    playing = true;
     display.innerText = "STARTING"
-    record.style.backgroundImage = 'url("' + cover + '")'
-    setTimeout(function () {
-        navigator.vibrate(500);
-        arm.style.transform = "rotate(20deg)"
-    }, 500)
-    setTimeout(function () {
-        record.style.animation = "playing linear 1000ms"
-        record.style.animationIterationCount = "infinite"
-        display.innerText = "PLAY"
-    }, 1500)
+    if (playing) {
+        stopPlayingUI()
+        setTimeout(startPlayingUI(cover), 1000)
+    } else {
+        playing = true;
+        record.style.backgroundImage = 'url("' + cover + '")'
+        setTimeout(function () {
+            navigator.vibrate(500);
+            arm.style.transform = "rotate(20deg)"
+        }, 500)
+        setTimeout(function () {
+            record.style.animation = "playing linear 1000ms"
+            record.style.animationIterationCount = "infinite"
+            display.innerText = "PLAY"
+        }, 1500)
+    }
 }
 
 function enablePlayButton(pauseAction) {

@@ -23,13 +23,10 @@ async function startReader() {
                 if (textData.includes("NFCRECORDPLAYER:")) {
                     var tagjson = JSON.parse(textData.replace("NFCRECORDPLAYER:", ""))
                     if (tagjson.provider == "link") {
-                        if (playing) { stopPlayingUI() }
+                        startPlayingUI("")
                         setTimeout(function () {
-                            startPlayingUI("")
-                            setTimeout(function () {
-                                window.open(tagjson.uri)
-                            }, 1500)
-                        },1000)
+                            window.open(tagjson.uri)
+                        }, 2000)
                     }
                 } else {
                     alert("Invalid NFC Tag")
@@ -52,9 +49,9 @@ function writeTag(provider, uri) {
         alert("Write Complete")
         writing = false;
         if (playing) {
-          display.innerText = "PLAY"
+            display.innerText = "PLAY"
         } else {
-          display.innerText = "WRITE COMPLETE"
+            display.innerText = "WRITE COMPLETE"
         }
     }, { once: true });
     alert("Ready to write\n Hold NFC tag on the back of the device")
