@@ -1,6 +1,6 @@
 function startPlayingUI(cover) {
-    clickFeedback()
     display.innerText = "STARTING"
+    playbtn.disabled = false
     record.style.backgroundImage = 'url("' + cover + '")'
     setTimeout(function () {
         navigator.vibrate(500);
@@ -41,6 +41,7 @@ function powerOn(btn) {
     }
     startReader()
     display.innerText = "Scanning"
+    writebtn.disabled = false
 }
 
 function clickFeedback() {
