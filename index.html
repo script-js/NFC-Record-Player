@@ -7,8 +7,17 @@
         <link rel="stylesheet" href="ui.css">
     </head>
     <body>
+        <div id="popup">
+            <h2>Write New Tag</h2>
+            <h3>Music Source: <select id="provider">
+                <option>Link</option>
+            </select></h3>
+            <h3>Link: <input id="link"></h3>
+            <button onclick="hidePopup()">Close</button>
+            <button onclick="writeTag(provider.value.toLowerCase(), link.value)">Write Tag</button>
+        </div>
         <div class="recordContainer"><div id="record"><div class="hole" style="background-color: white;"><div class="hole" style="background-color: #4d3028; box-shadow: 3px 5px 5px black;"></div></div></div><div id="arm"></div></div>
-        <div class="controlsContainer"><div id="display">OFF</div><div id="controls"><button class="powerbtn" onclick="powerOn(this)">Power</button><button>Write New</button><br><button disabled>Play/Pause</button></div></div>
+        <div class="controlsContainer"><div id="display">OFF</div><div id="controls"><button class="powerbtn" onclick="powerOn(this)">Power</button><button onclick="showPopup()">Write New</button><br><button disabled>Play/Pause</button></div></div>
         <audio src="clicksound.mp3" id="click"></audio>
     </body>
 </html>

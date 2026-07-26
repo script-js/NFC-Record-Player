@@ -13,6 +13,21 @@ function startPlayingUI(cover) {
     }, 1500)
 }
 
+function showPopup() {
+    popup.style.display = "block"
+    setTimeout(function () {
+        popup.style.bottom = "-2%"
+    }, 100)
+}
+
+function hidePopup() {
+    popup.style.bottom = "-50%"
+    setTimeout(function () {
+        popup.style.display = "none"
+    }, 100)
+}
+
+
 function powerOn(btn) {
     clickFeedback()
     btn.classList = "powerbtn on"

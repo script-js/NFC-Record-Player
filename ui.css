@@ -7,6 +7,7 @@
 
 body {
     background-color: #76483b;
+    font-family: 'Courier New', Courier, monospace;
     background-image: url('bkg.webp');
     background-size: cover;
     background-position: center;
@@ -73,7 +74,7 @@ body {
     }
 }
 
-button {
+button,select,input {
     box-shadow: 3px 5px 5px black;
     background-color: #76483b;
     padding: 10px;
@@ -116,4 +117,27 @@ button {
 .powerbtn.on {
     background-color: #559928;
     border-style: inset;
+}
+
+#popup {
+    display: none;
+    position: absolute;
+    border-top: 2px solid black;
+    bottom: -50%;
+    left: 0px;
+    min-height: 40%;
+    width: 102%;
+    transition: ease-out 200ms;
+    background-color: #76483b;
+    text-align: center;
+}
+
+select,input {
+    padding-bottom: 1px;
+    padding-top: 1px;
+}
+
+input {
+    width: 200px;
+    height: 25px;
 }

@@ -21,7 +21,12 @@ async function startReader() {
                 console.log(`Language code: ${record.lang}`);
                 if (textData.includes("NFCRECORDPLAYER:")) {
                     var tagjson = JSON.parse(textData.replace("NFCRECORDPLAYER:",""))
-                    alert("Provider: " + tagjson.provider + "\nURI: " + tagjson.uri)
+                    if (tagjson.provider == "link") {
+                        startPlayingUI("")
+                        setTimeout(function() {
+                            window.open(tagjson.uri)
+                        }, 1500)
+                    }
                 } else {
                     alert("Invalid NFC Tag")
                 }
