@@ -51,5 +51,10 @@ function writeTag(provider, uri) {
         ndef.write(text)
         alert("Write Complete")
         writing = false;
+        if (playing) {
+          display.innerText = "PLAY"
+        } else {
+          display.innerText = "WRITE COMPLETE"
+        }
     }, { once: true });
 }
