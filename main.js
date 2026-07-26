@@ -41,7 +41,7 @@ function powerOn(btn) {
     btn.onclick = function () {
         clickFeedback()
         display.innerText = "POWERING OFF"
-        stopPlayingUI()
+        if (playing) { stopPlayingUI() }
         setTimeout(function () {
             location.reload()
         }, 1000)
