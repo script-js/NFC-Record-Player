@@ -51,5 +51,11 @@ function writeTag(provider, uri) {
         ndef.write(text)
         alert("Write Complete")
         writing = false;
+        if (playing) {
+          display.innerText = "PLAY"
+        } else {
+          display.innerText = "WRITE COMPLETE"
+        }
     }, { once: true });
+    alert("Ready to write\n Hold NFC tag on the back of the device")
 }
