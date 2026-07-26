@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script src="main.js"></script>
         <script src="nfc.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="ui.css">
     </head>
     <body>
-        <button onclick="read()">Read</button>
+        <div class="recordContainer"><div id="record"><div class="hole" style="background-color: white;"><div class="hole" style="background-color: #4d3028; box-shadow: 3px 5px 5px black;"></div></div></div><div id="arm"></div></div>
+        <div class="controlsContainer"><div id="display">OFF</div><div id="controls"><button class="powerbtn" onclick="powerOn(this)">Power</button><button>Write New</button><br><button disabled>Play/Pause</button></div></div>
+        <audio src="clicksound.mp3" id="click"></audio>
     </body>
 </html>

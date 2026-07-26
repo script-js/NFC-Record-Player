@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+
+@font-face {
+  font-family: "Digital";
+  src: url("digital-7.ttf");
+}
+
+body {
+    background-color: #76483b;
+    background-image: url('bkg.webp');
+    background-size: cover;
+    background-position: center;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    user-select: none;
+}
+
+.recordContainer {
+    width: 90%;
+    height: 70%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 3%;
+}
+
+#record {
+    border-radius: 100%;
+    aspect-ratio: 1 / 1;
+    width: 90%;
+    background-color: black;
+    margin: auto;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+    transition: ease 100ms;
+    box-shadow: 0px 0px 15px 0px black;
+}
+
+#arm {
+    background-color: black;
+    align-self: flex-start;
+    width: 6%;
+    height: 70%;
+    transition: ease-in-out 0.5s;
+    transform-origin: top center;
+}
+
+.hole {
+    border-radius: 100%;
+    aspect-ratio: 1 / 1;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes playing {
+    0% {
+        transform: rotate(0turn);
+    }
+
+    100% {
+        transform: rotate(1turn);
+    }
+}
+
+button {
+    box-shadow: 3px 5px 5px black;
+    background-color: #76483b;
+    padding: 10px;
+    margin: 10px;
+    font-family: "Silkscreen", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.5em;
+    border-width: 3px;
+}
+
+.controlsContainer {
+    height: 28%;
+    width: 97%;
+    text-align: center;
+}
+
+#controls {
+    height: 70%;
+}
+
+#display {
+    height: 10%;
+    width: 70%;
+    font-family: 'Digital','Courier New', Courier, monospace;
+    padding: 5px;
+    font-size: 23px;
+    margin: auto;
+    border-radius: 5px;
+    outline: 3px solid black;
+    border: 1px solid rgb(167, 164, 164);
+    background-color: gray;
+    font-weight: bold;
+}
+
+.powerbtn {
+    background-color: #b32020;
+}
+
+.powerbtn.on {
+    background-color: #559928;
+    border-style: inset;
+}

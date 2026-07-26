@@ -1,7 +1,7 @@
 const ndef = new NDEFReader();
 var writing = false;
 
-async function read() {
+async function startReader() {
     await ndef.scan();
     console.log("Scan started");
     ndef.addEventListener("readingerror", () => {
