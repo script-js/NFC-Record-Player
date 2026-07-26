@@ -17,7 +17,7 @@
             <button onclick="writeTag(provider.value.toLowerCase(), link.value); hidePopup()">Write Tag</button>
         </div>
         <div class="recordContainer"><div id="record"><div class="hole" style="background-color: white;"><div class="hole" style="background-color: #4d3028; box-shadow: 3px 5px 5px black;"></div></div></div><div id="arm"></div></div>
-        <div class="controlsContainer"><div id="display">OFF</div><div id="controls"><button class="powerbtn" onclick="powerOn(this)">Power</button><button onclick="showPopup()" disabled id="writebtn">Write New</button><br><button disabled id="playbtn">Play/Pause</button></div></div>
+        <div class="controlsContainer"><div id="display">OFF</div><div id="controls"><button class="powerbtn" onclick="powerOn(this)" ontouchstart="clickFeedback()">Power</button><button ontouchstart="clickFeedback()" onclick="showPopup()" disabled id="writebtn">Write New</button><br><button disabled id="playbtn" ontouchstart="clickFeedback()">Play/Pause</button></div></div>
         <audio src="clicksound.mp3" id="click"></audio>
     </body>
 </html>
