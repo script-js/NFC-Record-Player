@@ -20,12 +20,15 @@ async function startReader() {
                 console.log(`Text content: ${textData}`);
                 console.log(`Language code: ${record.lang}`);
                 if (textData.includes("NFCRECORDPLAYER:")) {
-                    var tagjson = JSON.parse(textData.replace("NFCRECORDPLAYER:",""))
+                    var tagjson = JSON.parse(textData.replace("NFCRECORDPLAYER:", ""))
                     if (tagjson.provider == "link") {
-                        startPlayingUI("")
-                        setTimeout(function() {
-                            window.open(tagjson.uri)
-                        }, 1500)
+                        if (playing) { stopPlayingUI() }
+                        setTimeout(function () {
+                            startPlayingUI("")
+                            setTimeout(function () {
+                                window.open(tagjson.uri)
+                            }, 1500)
+                        },1000)
                     }
                 } else {
                     alert("Invalid NFC Tag")
@@ -38,7 +41,7 @@ async function startReader() {
 }
 
 function writeTag(provider, uri) {
-    var text = "NFCRECORDPLAYER:" + JSON.stringify({provider, uri})
+    var text = "NFCRECORDPLAYER:" + JSON.stringify({ provider, uri })
     writing = true;
     console.log("Waiting to write...")
     ndef.addEventListener("reading", ({ message, serialNumber }) => {

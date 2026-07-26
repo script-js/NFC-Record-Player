@@ -1,6 +1,8 @@
+var playing = false;
+
 function startPlayingUI(cover) {
+    playing = true;
     display.innerText = "STARTING"
-    playbtn.disabled = false
     record.style.backgroundImage = 'url("' + cover + '")'
     setTimeout(function () {
         navigator.vibrate(500);
@@ -11,6 +13,11 @@ function startPlayingUI(cover) {
         record.style.animationIterationCount = "infinite"
         display.innerText = "PLAY"
     }, 1500)
+}
+
+function enablePlayButton(pauseAction) {
+    playbtn.onclick = pauseAction
+    playbtn.disabled = false
 }
 
 function showPopup() {
