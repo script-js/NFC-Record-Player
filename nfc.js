@@ -1,5 +1,6 @@
 const ndef = new NDEFReader();
 var writing = false;
+navigator.wakeLock.request("screen");
 
 async function startReader() {
     await ndef.scan();
@@ -44,6 +45,7 @@ function writeTag(provider, uri) {
     var text = "NFCRECORDPLAYER:" + JSON.stringify({ provider, uri })
     writing = true;
     console.log("Waiting to write...")
+    display.innerText = "WRITING"
     ndef.addEventListener("reading", ({ message, serialNumber }) => {
         console.log("Writing " + text)
         ndef.write(text)
