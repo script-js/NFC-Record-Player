@@ -2,7 +2,6 @@ var playing = false;
 
 function startPlayingUI(cover, playCommand) {
     display.innerText = "STARTING"
-    console.log(playing)
     if (playing) {
         if (!playbtn.disabled) {
             playbtn.click()
@@ -28,6 +27,18 @@ function startPlayingUI(cover, playCommand) {
 function enablePlayButton(action) {
     playbtn.onclick = action
     playbtn.disabled = false
+}
+
+function toggleSeekButtons(prevAction, nextAction) {
+    if (prevAction && nextAction) {
+        fb.disabled = false
+        ff.disabled = false
+        fb.onclick = prevAction
+        ff.onclick = nextAction
+    } else {
+        fb.disabled = true
+        ff.disabled = true
+    }
 }
 
 function showPopup() {

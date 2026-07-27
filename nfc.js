@@ -1,4 +1,10 @@
-const ndef = new NDEFReader();
+try {
+    const ndef = new NDEFReader();
+} catch (err) {
+    console.warn(err)
+    alert("NFC is not supported in this browser.\nWeb NFC is only supported on Chrome based browsers on Android devices.")
+}
+
 var writing = false;
 navigator.wakeLock.request("screen");
 
@@ -11,7 +17,6 @@ async function startReader() {
 
     ndef.addEventListener("reading", ({ message, serialNumber }) => {
         if (!writing) {
-            console.log(message.records)
             var record = message.records[message.records.length - 1]
             if (record && record.recordType === "text") {
                 var decoder = new TextDecoder(record.encoding);
@@ -19,7 +24,6 @@ async function startReader() {
                 var textData = decoder.decode(record.data);
 
                 console.log(`Text content: ${textData}`);
-                console.log(`Language code: ${record.lang}`);
                 if (textData.includes("NFCRECORDPLAYER:")) {
                     var tagjson = JSON.parse(textData.replace("NFCRECORDPLAYER:", ""))
                     switch (tagjson.provider) {
@@ -27,13 +31,20 @@ async function startReader() {
                             startPlayingUI("https://s2.googleusercontent.com/s2/favicons?sz=256&domain_url=" + tagjson.uri, function () {
                                 window.open(tagjson.uri)
                             })
+                            playbtn.disabled = true
                             break;
                         case "youtube":
                             loadYTPlayer(tagjson.uri)
+                            break;
                         case "httpgetrequest":
                             startPlayingUI("", function () {
                                 console.log(fetch(tagjson.uri))
                             })
+                            playbtn.disabled = true
+                            break;
+                        default:
+                            alert("Invalid NFC Tag")
+                            break;
                     }
                 } else {
                     alert("Invalid NFC Tag")
@@ -48,9 +59,8 @@ async function startReader() {
 function writeTag(provider, uri) {
     var text = "NFCRECORDPLAYER:" + JSON.stringify({ provider, uri })
     writing = true;
-    console.log("Waiting to write...")
     display.innerText = "WRITING"
-    ndef.addEventListener("reading", async function( message, serialNumber ) {
+    ndef.addEventListener("reading", async function (message, serialNumber) {
         console.log("Writing " + text)
         await ndef.write(text)
         alert("Write Complete")
