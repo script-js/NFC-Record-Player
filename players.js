@@ -4,6 +4,8 @@ function loadYTPlayer(url) {
     var videoId = url.split("youtu")[1].replace("be.com", "").replace(".be/", "/watch?v=").split("watch?v=")[1].split("?")[0].split("&")[0]
     if (ytp) {
         ytp.loadVideoById({ videoId })
+        ytp.pauseVideo()
+        onPlayerReady({ target: ytp })
     } else {
         ytp = new YT.Player('ytplayer', {
             height: '1',

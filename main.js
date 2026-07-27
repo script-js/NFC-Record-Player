@@ -7,7 +7,6 @@ function startPlayingUI(cover, playCommand) {
         if (!playbtn.disabled) {
             playbtn.click()
         }
-        console.log("stop animation")
         stopPlayingUI()
         setTimeout(function () { startPlayingUI(cover, playCommand) }, 1000)
     } else {
