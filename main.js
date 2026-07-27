@@ -1,6 +1,6 @@
 var playing = false;
 
-function startPlayingUI(cover) {
+function startPlayingUI(cover, playCommand) {
     display.innerText = "STARTING"
     if (playing) {
         stopPlayingUI()
@@ -16,12 +16,13 @@ function startPlayingUI(cover) {
             record.style.animation = "playing linear 1000ms"
             record.style.animationIterationCount = "infinite"
             display.innerText = "PLAY"
+            playCommand()
         }, 1500)
     }
 }
 
-function enablePlayButton(pauseAction) {
-    playbtn.onclick = pauseAction
+function enablePlayButton(action) {
+    playbtn.onclick = action
     playbtn.disabled = false
 }
 
@@ -42,6 +43,7 @@ function hidePopup() {
 
 function powerOn(btn) {
     clickFeedback()
+    document.documentElement.requestFullscreen()
     btn.classList = "powerbtn on"
     btn.onclick = function () {
         clickFeedback()

@@ -141,3 +141,8 @@ input {
     width: 200px;
     height: 25px;
 }
+
+#ytplayerdiv {
+    width: 0px;
+    height: 0px;
+}

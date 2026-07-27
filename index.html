@@ -1,23 +1,48 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="main.js"></script>
-        <script src="nfc.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="ui.css">
-    </head>
-    <body>
-        <div id="popup">
-            <h2>Write New Tag</h2>
-            <h3>Music Source: <select id="provider">
+
+<head>
+    <script>
+        var tag = document.createElement('script');
+
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    </script>
+    <script src="main.js"></script>
+    <script src="nfc.js"></script>
+    <script src="players.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="ui.css">
+</head>
+
+<body>
+    <div id="popup">
+        <h2>Write New Tag</h2>
+        <h3>Music Source: <select id="provider">
                 <option>Link</option>
             </select></h3>
-            <h3>Link: <input id="link"></h3>
-            <button onclick="hidePopup()">Close</button>
-            <button onclick="writeTag(provider.value.toLowerCase(), link.value); hidePopup()">Write Tag</button>
+        <h3>Link: <input id="link"></h3>
+        <button onclick="hidePopup()">Close</button>
+        <button onclick="writeTag(provider.value.toLowerCase(), link.value); hidePopup()">Write Tag</button>
+    </div>
+    <div class="recordContainer">
+        <div id="record">
+            <div class="hole" style="background-color: white;">
+                <div class="hole" style="background-color: #4d3028; box-shadow: 3px 5px 5px black;"></div>
+            </div>
         </div>
-        <div class="recordContainer"><div id="record"><div class="hole" style="background-color: white;"><div class="hole" style="background-color: #4d3028; box-shadow: 3px 5px 5px black;"></div></div></div><div id="arm"></div></div>
-        <div class="controlsContainer"><div id="display">OFF</div><div id="controls"><button class="powerbtn" onclick="powerOn(this)" ontouchstart="clickFeedback()">Power</button><button ontouchstart="clickFeedback()" onclick="showPopup()" disabled id="writebtn">Write New</button><br><button disabled id="playbtn" ontouchstart="clickFeedback()">Play/Pause</button></div></div>
-        <audio src="clicksound.mp3" id="click"></audio>
-    </body>
+        <div id="arm"></div>
+    </div>
+    <div class="controlsContainer">
+        <div id="display">OFF</div>
+        <div id="controls"><button class="powerbtn" onclick="powerOn(this)"
+                ontouchstart="clickFeedback()">Power</button><button ontouchstart="clickFeedback()"
+                onclick="showPopup()" disabled id="writebtn">Write New</button><br><button disabled id="playbtn"
+                ontouchstart="clickFeedback()">Play/Pause</button></div>
+    </div>
+    <div id="ytplayerdiv"></div>
+    <audio src="clicksound.mp3" id="click"></audio>
+</body>
+
 </html>
