@@ -58,7 +58,6 @@ function hidePopup() {
 
 function powerOn(btn) {
     clickFeedback()
-    setTimeout(document.documentElement.requestFullscreen, 2000)
     btn.classList = "powerbtn on"
     btn.onclick = function () {
         clickFeedback()
@@ -75,7 +74,7 @@ function powerOn(btn) {
 
 function clickFeedback() {
     click.currentTime = 0
-    navigator.vibrate(50);
+    navigator.vibrate(10);
     click.play()
 }
 
