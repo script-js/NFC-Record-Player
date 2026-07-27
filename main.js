@@ -76,9 +76,11 @@ function stopPlayingUI() {
 function pauseUI() {
     if (playing) {
         record.style.animationIterationCount = "1"
+        display.innerText = "STOP"
     } else {
         record.style.animation = "playing linear 1000ms"
         record.style.animationIterationCount = "infinite"
+        display.innerText = "PLAY"
     }
     playing = !playing
 }

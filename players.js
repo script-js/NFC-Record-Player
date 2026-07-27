@@ -21,12 +21,12 @@ function onPlayerReady(event) {
         event.target.playVideo()
     })
     enablePlayButton(function() {
-        pauseUI()
         if (playing) {
             event.target.pauseVideo()
         } else {
             event.target.playVideo()
         }
+        pauseUI()
     })
 }
 
