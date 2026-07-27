@@ -1,5 +1,7 @@
+var ndef;
+
 try {
-    const ndef = new NDEFReader();
+    ndef = new NDEFReader();
 } catch (err) {
     console.warn(err)
     alert("NFC is not supported in this browser.\nWeb NFC is only supported on Chrome based browsers on Android devices.")
