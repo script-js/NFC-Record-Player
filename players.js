@@ -22,7 +22,7 @@ function loadYTPlayer(url) {
 function onPlayerReady(event) {
     var videoId = event.target.getVideoData().video_id
     startPlayingUI(`http://img.youtube.com/vi/${videoId}/maxresdefault.jpg`, function () {
-        event.target.playVideo()
+        setTimeout(event.target.playVideo, 500)
     })
     enablePlayButton(function () {
         if (playing) {

@@ -24,7 +24,7 @@ async function startReader() {
                     var tagjson = JSON.parse(textData.replace("NFCRECORDPLAYER:", ""))
                     switch (tagjson.provider) {
                         case "link":
-                            startPlayingUI("https://s2.googleusercontent.com/s2/favicons?domain_url=" + tagjson.uri, function () {
+                            startPlayingUI("https://s2.googleusercontent.com/s2/favicons?sz=256&domain_url=" + tagjson.uri, function () {
                                 window.open(tagjson.uri)
                             })
                             break;
@@ -50,9 +50,9 @@ function writeTag(provider, uri) {
     writing = true;
     console.log("Waiting to write...")
     display.innerText = "WRITING"
-    ndef.addEventListener("reading", ({ message, serialNumber }) => {
+    ndef.addEventListener("reading", async function( message, serialNumber ) {
         console.log("Writing " + text)
-        ndef.write(text)
+        await ndef.write(text)
         alert("Write Complete")
         writing = false;
         if (playing) {
