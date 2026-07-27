@@ -2,8 +2,8 @@ var ytp;
 
 function loadYTPlayer(url) {
     var urlParams = new URLSearchParams(url.split("youtu")[1].replace("be.com", "").replace(".be/", "/watch?v=").replace("/watch", ""));
-    var videoId = urlParams.get("v")
-    var list = urlParams.get("list")
+    var videoId = urlParams.get("v").split("?")[0]
+    var list = urlParams.get("list").split("?")[0]
     console.log(videoId, list)
     if (!ytp) {
         var playerConfig = {
