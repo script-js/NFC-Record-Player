@@ -5,7 +5,10 @@ function loadYTPlayer(url) {
     if (ytp) {
         ytp.loadVideoById({ videoId })
         ytp.pauseVideo()
-        onPlayerReady({ target: ytp })
+        console.log("start animation")
+        startPlayingUI(`http://img.youtube.com/vi/${videoId}/maxresdefault.jpg`, function () {
+            ytp.playVideo()
+        })
     } else {
         ytp = new YT.Player('ytplayer', {
             height: '1',
