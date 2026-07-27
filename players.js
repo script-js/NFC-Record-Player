@@ -20,6 +20,14 @@ function onPlayerReady(event) {
     startPlayingUI(`http://img.youtube.com/vi/${videoId}/maxresdefault.jpg`, function() {
         event.target.playVideo()
     })
+    enablePlayButton(function() {
+        pauseUI()
+        if (playing) {
+            event.target.pauseVideo()
+        } else {
+            event.target.playVideo()
+        }
+    })
 }
 
 function onPlayerStateChange(event) {

@@ -23,10 +23,10 @@ async function startReader() {
                 if (textData.includes("NFCRECORDPLAYER:")) {
                     var tagjson = JSON.parse(textData.replace("NFCRECORDPLAYER:", ""))
                     if (tagjson.provider == "link") {
-                        startPlayingUI("")
-                        setTimeout(function () {
+                        var domain = new URL(tagjson.uri).hostname
+                        startPlayingUI("https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&size=128&url=" + domain, function () {
                             window.open(tagjson.uri)
-                        }, 2000)
+                        })
                     }
                 } else {
                     alert("Invalid NFC Tag")

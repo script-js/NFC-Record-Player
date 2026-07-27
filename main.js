@@ -59,14 +59,26 @@ function powerOn(btn) {
 }
 
 function clickFeedback() {
+    click.currentTime = 0
     navigator.vibrate(50);
     click.play()
 }
 
 function stopPlayingUI() {
+    playing = false;
     record.style.animationIterationCount = "1"
     setTimeout(function () {
         navigator.vibrate(500);
         arm.style.transform = "rotate(0deg)"
     }, 500)
+}
+
+function pauseUI() {
+    if (playing) {
+        record.style.animationIterationCount = "1"
+    } else {
+        record.style.animation = "playing linear 1000ms"
+        record.style.animationIterationCount = "infinite"
+    }
+    playing = !playing
 }
