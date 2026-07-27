@@ -27,7 +27,8 @@
             </select></h3>
         <h3>Link: <input id="link"></h3>
         <button onclick="hidePopup()">Close</button>
-        <button onclick="writeTag(provider.value.toLowerCase().replaceAll(' ',''), link.value); hidePopup()">Write Tag</button>
+        <button onclick="writeTag(provider.value.toLowerCase().replaceAll(' ',''), link.value); hidePopup()">Write
+            Tag</button>
     </div>
     <div class="recordContainer">
         <div id="record">
@@ -41,8 +42,10 @@
         <div id="display">OFF</div>
         <div id="controls"><button class="powerbtn" onclick="powerOn(this)"
                 ontouchstart="clickFeedback()">Power</button><button ontouchstart="clickFeedback()"
-                onclick="showPopup()" disabled id="writebtn">Write New</button><br><button id="fb" class="seekBtn" disabled>&#60;&#60;</button><button disabled id="playbtn"
-                ontouchstart="clickFeedback()">Play/Pause</button><button id="ff" class="seekBtn" disabled>&#62;&#62;</button></div>
+                onclick="showPopup()" disabled id="writebtn">Write New</button><br><button id="fb" class="seekBtn"
+                disabled ontouchstart="clickFeedback()">&#60;&#60;</button><button disabled id="playbtn"
+                ontouchstart="clickFeedback()">Play/Pause</button><button id="ff" class="seekBtn" disabled
+                ontouchstart="clickFeedback()">&#62;&#62;</button></div>
     </div>
     <div id="ytplayer"></div>
     <audio src="clicksound.mp3" id="click"></audio>

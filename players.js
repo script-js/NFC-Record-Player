@@ -54,7 +54,7 @@ function onPlayerReady(event) {
         event.target.playVideo()
     })
     if (event.target.playerInfo.playlistId) {
-        toggleSeekButtons(event.target.previousVideo, event.target.nextVideo)
+        toggleSeekButtons(function () { event.target.previousVideo() }, function () { event.target.nextVideo() })
     }
     enablePlayButton(function () {
         if (playing) {
