@@ -24,6 +24,7 @@ async function startReader() {
                     var tagjson = JSON.parse(textData.replace("NFCRECORDPLAYER:", ""))
                     switch (tagjson.provider) {
                         case "link":
+                            window.open("https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&size=128&url=" + tagjson.uri)
                             startPlayingUI("https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&size=128&url=" + tagjson.uri, function () {
                                 window.open(tagjson.uri)
                             })
