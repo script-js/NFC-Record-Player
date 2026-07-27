@@ -2,6 +2,7 @@ var playing = false;
 
 function startPlayingUI(cover, playCommand) {
     display.innerText = "STARTING"
+    console.log(playing)
     if (playing) {
         if (!playbtn.disabled) {
             playbtn.click()

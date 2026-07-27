@@ -14,7 +14,6 @@ function loadYTPlayer(url) {
             },
             events: {
                 'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange,
                 'onError': () => { window.open(url) }
             }
         });
@@ -34,8 +33,4 @@ function onPlayerReady(event) {
         }
         pauseUI(event.target.getPlayerState() === 1)
     })
-}
-
-function onPlayerStateChange(event) {
-    console.log(event)
 }
