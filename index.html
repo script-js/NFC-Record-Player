@@ -20,11 +20,14 @@
     <div id="popup">
         <h2>Write New Tag</h2>
         <h3>Music Source: <select id="provider">
+                <option>Spotify</option>
+                <option>YouTube</option>
                 <option>Link</option>
+                <option>HTTP GET Request</option>
             </select></h3>
         <h3>Link: <input id="link"></h3>
         <button onclick="hidePopup()">Close</button>
-        <button onclick="writeTag(provider.value.toLowerCase(), link.value); hidePopup()">Write Tag</button>
+        <button onclick="writeTag(provider.value.toLowerCase().replaceAll(' ',''), link.value); hidePopup()">Write Tag</button>
     </div>
     <div class="recordContainer">
         <div id="record">

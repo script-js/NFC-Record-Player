@@ -22,10 +22,18 @@ async function startReader() {
                 console.log(`Language code: ${record.lang}`);
                 if (textData.includes("NFCRECORDPLAYER:")) {
                     var tagjson = JSON.parse(textData.replace("NFCRECORDPLAYER:", ""))
-                    if (tagjson.provider == "link") {
-                        startPlayingUI("https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&size=128&url=" + tagjson.uri, function () {
-                            window.open(tagjson.uri)
-                        })
+                    switch (tagjson.provider) {
+                        case "link":
+                            startPlayingUI("https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&size=128&url=" + tagjson.uri, function () {
+                                window.open(tagjson.uri)
+                            })
+                            break;
+                        case "youtube":
+                            loadYTPlayer(tagjson.uri)
+                        case "httpgetrequest":
+                            startPlayingUI("", function () {
+                                console.log(fetch(tagjson.uri))
+                            })
                     }
                 } else {
                     alert("Invalid NFC Tag")

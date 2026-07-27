@@ -135,11 +135,8 @@ button,select,input {
 select,input {
     padding-bottom: 1px;
     padding-top: 1px;
-}
-
-input {
     width: 200px;
-    height: 25px;
+    font-size: 17px;
 }
 
 #ytplayerdiv {
