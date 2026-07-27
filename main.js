@@ -3,8 +3,12 @@ var playing = false;
 function startPlayingUI(cover, playCommand) {
     display.innerText = "STARTING"
     if (playing) {
+        if (!playbtn.disabled) {
+            playbtn.click()
+        }
+        console.log("stop animation")
         stopPlayingUI()
-        setTimeout(startPlayingUI(cover), 1000)
+        setTimeout(function () { startPlayingUI(cover, playCommand) }, 1000)
     } else {
         playing = true;
         record.style.backgroundImage = 'url("' + cover + '")'
