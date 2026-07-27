@@ -51,6 +51,7 @@ function onPlayerReady(event) {
     startPlayingUI(`http://img.youtube.com/vi/${videoId}/maxresdefault.jpg`, function () {
         event.target.playVideo()
     })
+    toggleSeekButtons(event.target.previousVideo, event.target.nextVideo)
     enablePlayButton(function () {
         if (playing) {
             event.target.pauseVideo()
