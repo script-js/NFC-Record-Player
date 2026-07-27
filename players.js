@@ -1,6 +1,7 @@
 var ytp;
 
 function onYouTubeIFrameAPIReady() {
+    console.log(ytp)
     ytp = new YT.Player('ytplayer', {
         height: '1',
         width: '1',
@@ -13,6 +14,7 @@ function onYouTubeIFrameAPIReady() {
             'onError': () => { window.open(url) }
         }
     });
+    console.log(ytp)
 }
 
 function loadYTPlayer(url) {
