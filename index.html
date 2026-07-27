@@ -11,23 +11,6 @@
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        function onYouTubeIFrameAPIReady() {
-            console.log(ytp)
-            ytp = new YT.Player('ytplayer', {
-                height: '1',
-                width: '1',
-                playerVars: {
-                    'playsinline': 1
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange,
-                    'onError': () => { window.open(url) }
-                }
-            });
-            console.log(ytp)
-        }
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="ui.css">
@@ -44,8 +27,7 @@
             </select></h3>
         <h3>Link: <input id="link"></h3>
         <button onclick="hidePopup()">Close</button>
-        <button onclick="writeTag(provider.value.toLowerCase().replaceAll(' ',''), link.value); hidePopup()">Write
-            Tag</button>
+        <button onclick="writeTag(provider.value.toLowerCase().replaceAll(' ',''), link.value); hidePopup()">Write Tag</button>
     </div>
     <div class="recordContainer">
         <div id="record">

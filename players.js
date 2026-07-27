@@ -2,7 +2,23 @@ var ytp;
 
 function loadYTPlayer(url) {
     var videoId = url.split("youtu")[1].replace("be.com", "").replace(".be/", "/watch?v=").split("watch?v=")[1].split("?")[0].split("&")[0]
-    ytp.loadVideoById({ videoId })
+    if (ytp) {
+        ytp.loadVideoById({ videoId })
+    } else {
+        ytp = new YT.Player('ytplayer', {
+            height: '1',
+            width: '1',
+            videoId,
+            playerVars: {
+                'playsinline': 1
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange,
+                'onError': () => { window.open(url) }
+            }
+        });
+    }
 }
 
 function onPlayerReady(event) {
