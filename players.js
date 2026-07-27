@@ -1,13 +1,9 @@
-var ytplayer;
-var yterror = false;
+var ytp;
 
-function loadYTPlayer(url) {
-    var id = url.split("youtu")[1].replace("be.com", "").replace(".be/", "/watch?v=").split("watch?v=")[1].split("?")[0].split("&")[0]
-    console.log(id)
-    ytplayer = new YT.Player('ytplayerdiv', {
+function onYouTubeIFrameAPIReady() {
+    ytp = new YT.Player('ytplayer', {
         height: '1',
         width: '1',
-        videoId: id,
         playerVars: {
             'playsinline': 1
         },
@@ -19,10 +15,15 @@ function loadYTPlayer(url) {
     });
 }
 
+function loadYTPlayer(url) {
+    var videoId = url.split("youtu")[1].replace("be.com", "").replace(".be/", "/watch?v=").split("watch?v=")[1].split("?")[0].split("&")[0]
+    ytp.loadVideoById({ videoId })
+}
+
 function onPlayerReady(event) {
     var videoId = event.target.getVideoData().video_id
     startPlayingUI(`http://img.youtube.com/vi/${videoId}/maxresdefault.jpg`, function () {
-        setTimeout(event.target.playVideo, 500)
+        event.target.playVideo()
     })
     enablePlayButton(function () {
         if (playing) {
@@ -30,7 +31,7 @@ function onPlayerReady(event) {
         } else {
             event.target.playVideo()
         }
-        pauseUI()
+        pauseUI(event.target.getPlayerState() === 1)
     })
 }
 
