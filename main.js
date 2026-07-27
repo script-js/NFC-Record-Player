@@ -58,7 +58,7 @@ function hidePopup() {
 
 function powerOn(btn) {
     clickFeedback()
-    document.documentElement.requestFullscreen()
+    setTimeout(document.documentElement.requestFullscreen, 2000)
     btn.classList = "powerbtn on"
     btn.onclick = function () {
         clickFeedback()
