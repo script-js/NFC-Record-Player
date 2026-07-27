@@ -1,4 +1,5 @@
 var ndef;
+var currentTag = "notag";
 
 try {
     ndef = new NDEFReader();
@@ -9,6 +10,14 @@ try {
 
 var writing = false;
 navigator.wakeLock.request("screen");
+
+function invalidTag() {
+    var prevAction = display.innerText
+    display.innerText = "INVALID TAG"
+    setTimeout(function () {
+        display.innerText = prevAction
+    }, 1500)
+}
 
 async function startReader() {
     await ndef.scan();
@@ -26,6 +35,7 @@ async function startReader() {
                 var textData = decoder.decode(record.data);
 
                 console.log(`Text content: ${textData}`);
+                if (textData == currentTag) { return; }
                 if (textData.includes("NFCRECORDPLAYER:")) {
                     var tagjson = JSON.parse(textData.replace("NFCRECORDPLAYER:", ""))
                     switch (tagjson.provider) {
@@ -45,14 +55,15 @@ async function startReader() {
                             playbtn.disabled = true
                             break;
                         default:
-                            alert("Invalid NFC Tag")
+                            invalidTag()
                             break;
                     }
+                    currentTag = textData
                 } else {
-                    alert("Invalid NFC Tag")
+                    invalidTag()
                 }
             } else {
-                alert("Invalid NFC Tag")
+                invalidTag()
             }
         }
     });
