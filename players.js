@@ -2,8 +2,10 @@ var ytp;
 
 function loadYTPlayer(url) {
     var urlParams = new URLSearchParams(url.split("youtu")[1].replace("be.com", "").replace(".be/", "/watch?v=").replace("/watch", ""));
-    var videoId = urlParams.get("v").split("?")[0]
-    var list = urlParams.get("list").split("?")[0]
+    var videoId = urlParams.get("v")
+    if (videoId && videoId.includes("?")) { videoId = videoId.split("?")[0] }
+    var list = urlParams.get("list")
+    if (list && list.includes("?")) { list = list.split("?")[0] }
     console.log(videoId, list)
     if (!ytp) {
         var playerConfig = {
@@ -14,7 +16,7 @@ function loadYTPlayer(url) {
             },
             events: {
                 'onReady': onPlayerReady,
-                //'onError': () => { window.open(url) },
+                'onError': () => { window.open(url) },
                 'onStateChange': function (state) { if (state == YT.PlayerState.PLAYING) { record.style.backgroundImage = 'url("http://img.youtube.com/vi/' + ytp.getVideoData().video_id + '/maxresdefault.jpg")' } }
             }
         }
@@ -51,7 +53,9 @@ function onPlayerReady(event) {
     startPlayingUI(`http://img.youtube.com/vi/${videoId}/maxresdefault.jpg`, function () {
         event.target.playVideo()
     })
-    toggleSeekButtons(event.target.previousVideo, event.target.nextVideo)
+    if (event.target.playerInfo.playlistId) {
+        toggleSeekButtons(event.target.previousVideo, event.target.nextVideo)
+    }
     enablePlayButton(function () {
         if (playing) {
             event.target.pauseVideo()
