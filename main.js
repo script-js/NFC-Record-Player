@@ -72,7 +72,10 @@ function powerOn(btn) {
     writebtn.disabled = false
 }
 
-function clickFeedback() {
+function clickFeedback(elem) {
+    if (elem && elem.disabled == true) {
+        return
+    }
     click.currentTime = 0
     navigator.vibrate(10);
     click.play()

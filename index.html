@@ -41,11 +41,13 @@
     <div class="controlsContainer">
         <div id="display">OFF</div>
         <div id="controls"><button class="powerbtn" onclick="powerOn(this)"
-                ontouchstart="clickFeedback()">Power</button><button ontouchstart="clickFeedback()"
-                onclick="showPopup()" disabled id="writebtn">Write New</button><br><button id="fb" class="seekBtn"
-                disabled ontouchstart="clickFeedback()">&#60;&#60;</button><button disabled id="playbtn"
-                ontouchstart="clickFeedback()">Play/Pause</button><button id="ff" class="seekBtn" disabled
-                ontouchstart="clickFeedback()">&#62;&#62;</button></div>
+                ontouchstart="clickFeedback()">Power</button><button ontouchstart="clickFeedback(this)"
+                ontouchend="clickFeedback(this)" onclick="showPopup()" disabled id="writebtn">Write
+                New</button><br><button id="fb" class="seekBtn" disabled ontouchstart="clickFeedback(this)"
+                ontouchend="clickFeedback(this)">&#60;&#60;</button><button ontouchstart="clickFeedback(this)"
+                ontouchend="clickFeedback(this)" disabled id="playbtn">Play/Pause</button><button id="ff"
+                class="seekBtn" disabled ontouchstart="clickFeedback(this)"
+                ontouchend="clickFeedback(this)">&#62;&#62;</button></div>
     </div>
     <div id="ytplayer"></div>
     <audio src="clicksound.mp3" id="click"></audio>
