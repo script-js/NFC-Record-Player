@@ -65,3 +65,40 @@ function onPlayerReady(event) {
         pauseUI(event.target.getPlayerState() === 1)
     })
 }
+
+function toSpotifyURI(url) {
+    if (url.includes("spotify.com/")) {
+        var parts = url.split("spotify.com/")[1].split("/")
+        return "spotify:" + parts[0] + ":" + parts[1].split("?")[0] + ":play";
+    } else {
+        return null;
+    }
+}
+
+async function playSpotify(url) {
+    var uriToOpen = toSpotifyURI(url)
+    if (!uriToOpen) {
+        alert("Invalid Spotify URL")
+        return;
+    }
+    if (window.Notification && Notification.permission !== "granted") {
+        await Notification.requestPermission();
+    }
+    var oembed = await (await fetch("https://open.spotify.com/oembed?url=" + url)).json();
+    startPlayingUI(oembed.thumbnail_url, function () {
+        location.href = uriToOpen
+        enablePlayButton(function () {
+            if (playing) {
+                interruptor.play()
+            } else {
+                interruptor.pause()
+            }
+            pauseUI()
+        })
+        setTimeout(function () {
+            new Notification("NFCPlayer", {
+                body: "Tap to return"
+            });
+        })
+    })
+}

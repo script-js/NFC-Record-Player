@@ -54,6 +54,9 @@ async function startReader() {
                             })
                             playbtn.disabled = true
                             break;
+                        case "spotify":
+                            playSpotify(tagjson.uri)
+                            break;
                         default:
                             invalidTag()
                             break;
