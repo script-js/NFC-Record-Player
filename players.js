@@ -90,10 +90,12 @@ async function playSpotify(url) {
         enablePlayButton(function () {
             if (playing) {
                 interruptor.play()
+                alert("Starting I")
             } else {
                 interruptor.pause()
+                alert("Stopping I")
             }
-            pauseUI()
+            pauseUI(playing)
         })
         setTimeout(function () {
             new Notification("NFCPlayer", {
