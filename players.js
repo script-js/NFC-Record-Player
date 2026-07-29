@@ -1,7 +1,8 @@
 var ytp;
+var scp;
 
 function loadYTPlayer(url) {
-    var urlParams = new URLSearchParams(url.split("youtu")[1].replace("be.com", "").replace(".be/", "/watch?v=").replace("/watch", "").replace("/playlist",""));
+    var urlParams = new URLSearchParams(url.split("youtu")[1].replace("be.com", "").replace(".be/", "/watch?v=").replace("/watch", "").replace("/playlist", ""));
     var videoId = urlParams.get("v")
     if (videoId && videoId.includes("?")) { videoId = videoId.split("?")[0] }
     var list = urlParams.get("list")
@@ -19,9 +20,8 @@ function loadYTPlayer(url) {
                 'onError': () => { window.open(url) },
                 'onStateChange': function (event) {
                     var state = event.data
-                    console.log(state, YT.PlayerState.ENDED)
                     if (state == YT.PlayerState.PLAYING) {
-                        record.style.backgroundImage = 'url("http://img.youtube.com/vi/' + ytp.getVideoData().video_id + '/maxresdefault.jpg")'
+                        record.style.backgroundImage = 'url("https://img.youtube.com/vi/' + ytp.getVideoData().video_id + '/maxresdefault.jpg")'
                     } else if (state == YT.PlayerState.ENDED) {
                         console.log("stopped")
                         stopPlayingUI()
@@ -109,5 +109,17 @@ async function playSpotify(url) {
             }
             pauseUI(playing)
         })
+    })
+}
+
+function loadSoundcloudPlayer(url) {
+    scp = SC.Widget("scplayer");
+    scp.load(url)
+    startPlayingUI(``, function () {
+        scp.play()
+        enablePlayButton(function() {
+            pauseUI(!scp.isPaused(), scp.play, scp.pause)
+        })
+        toggleSeekButtons(scp.prev, scp.next)
     })
 }
