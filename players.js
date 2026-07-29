@@ -17,7 +17,8 @@ function loadYTPlayer(url) {
             events: {
                 'onReady': onPlayerReady,
                 'onError': () => { window.open(url) },
-                'onStateChange': function (state) {
+                'onStateChange': function (event) {
+                    var state = event.data
                     console.log(state, YT.PlayerState.ENDED)
                     if (state == YT.PlayerState.PLAYING) {
                         record.style.backgroundImage = 'url("http://img.youtube.com/vi/' + ytp.getVideoData().video_id + '/maxresdefault.jpg")'
