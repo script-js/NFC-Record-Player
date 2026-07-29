@@ -118,8 +118,8 @@ function loadSoundcloudPlayer(url) {
     startPlayingUI(``, function () {
         scp.play()
         enablePlayButton(function() {
-            pauseUI(!scp.isPaused(), scp.play, scp.pause)
+            pauseUI(!scp.isPaused(), function() {scp.play()}, function() {scp.pause()})
         })
-        toggleSeekButtons(scp.prev, scp.next)
+        toggleSeekButtons(function() {scp.prev()}, function() {scp.next()})
     })
 }
