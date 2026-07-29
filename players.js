@@ -1,7 +1,7 @@
 var ytp;
 
 function loadYTPlayer(url) {
-    var urlParams = new URLSearchParams(url.split("youtu")[1].replace("be.com", "").replace(".be/", "/watch?v=").replace("/watch", ""));
+    var urlParams = new URLSearchParams(url.split("youtu")[1].replace("be.com", "").replace(".be/", "/watch?v=").replace("/watch", "").replace("/playlist",""));
     var videoId = urlParams.get("v")
     if (videoId && videoId.includes("?")) { videoId = videoId.split("?")[0] }
     var list = urlParams.get("list")
