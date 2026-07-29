@@ -76,7 +76,7 @@ function toSpotifyURI(url) {
     }
 }
 
-async function playSpotifyURI(url) {
+async function playSpotify(url) {
     var uriToOpen = toSpotifyURI(url)
     if (!uriToOpen) {
         alert("Invalid Spotify URL")
@@ -103,31 +103,4 @@ async function playSpotifyURI(url) {
         })
     })
 }
-
-async function playSpotify(url) {
-    var uriToOpen = toSpotifyURI(url)
-    if (!uriToOpen) {
-        alert("Invalid Spotify URL")
-        return;
-    }
-    var oembed = await(await fetch("https://open.spotify.com/oembed?url=" + url)).json();
-    spotp.loadEntity(uriToOpen);
-    startPlayingUI(oembed.thumbnail_url, function () {
-        spotp.play()
-        enablePlayButton(function () {
-            spotp.togglePlay()
-            pauseUI(playing)
-        })
-    })
-}
-
-window.onSpotifyIframeApiReady = (IFrameAPI) => {
-    var element = document.getElementById('spotplayer');
-    var options = {};
-    var callback = (EmbedController) => {
-        spotp = EmbedController;
-        console.log(EmbedController)
-    };
-    IFrameAPI.createController(element, options, callback);
-};
 
