@@ -58,14 +58,7 @@ function loadYTPlayer(url) {
 }
 
 function ytToggle() {
-    if (ytp.getPlayerState() === 1) {
-        ytp.pauseVideo()
-        console.log("pausing")
-    } else {
-        ytp.playVideo()
-        console.log("playing")
-    }
-    pauseUI(ytp.getPlayerState() === 1)
+    pauseUI(ytp.getPlayerState() === 1, function () { ytp.playVideo() }, function () { ytp.pauseVideo() })
 }
 
 function onPlayerReady(event) {

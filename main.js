@@ -10,7 +10,9 @@ function startPlayingUI(cover, playCommand) {
         setTimeout(function () { startPlayingUI(cover, playCommand) }, 1000)
     } else {
         playing = true;
-        record.style.backgroundImage = 'url("' + cover + '")'
+        if (cover) {
+            record.style.backgroundImage = 'url("' + cover + '")'
+        }
         setTimeout(function () {
             navigator.vibrate(500);
             arm.style.transform = "rotate(20deg)"
@@ -90,14 +92,20 @@ function stopPlayingUI() {
     }, 500)
 }
 
-function pauseUI(playingStatus) {
+function pauseUI(playingStatus, play, pause) {
     if (playingStatus) {
         record.style.animationIterationCount = "1"
         display.innerText = "STOP"
+        pause()
     } else {
-        record.style.animation = "playing linear 1000ms"
-        record.style.animationIterationCount = "infinite"
-        display.innerText = "PLAY"
+        if (arm.style.transform == "rotate(20deg)") {
+            record.style.animation = "playing linear 1000ms"
+            record.style.animationIterationCount = "infinite"
+            display.innerText = "PLAY"
+            play()
+        } else {
+            startPlayingUI(null, play)
+        }
     }
     playing = !playingStatus
 }

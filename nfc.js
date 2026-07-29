@@ -49,7 +49,7 @@ async function startReader() {
                             loadYTPlayer(tagjson.uri)
                             break;
                         case "httpgetrequest":
-                            startPlayingUI("", function () {
+                            startPlayingUI(null, function () {
                                 console.log(fetch(tagjson.uri))
                             })
                             playbtn.disabled = true
