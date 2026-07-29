@@ -1,4 +1,5 @@
 var ytp;
+var spotp;
 
 function loadYTPlayer(url) {
     var urlParams = new URLSearchParams(url.split("youtu")[1].replace("be.com", "").replace(".be/", "/watch?v=").replace("/watch", ""));
@@ -75,7 +76,7 @@ function toSpotifyURI(url) {
     }
 }
 
-async function playSpotify(url) {
+async function playSpotifyURI(url) {
     var uriToOpen = toSpotifyURI(url)
     if (!uriToOpen) {
         alert("Invalid Spotify URL")
@@ -86,6 +87,9 @@ async function playSpotify(url) {
     }
     var oembed = await (await fetch("https://open.spotify.com/oembed?url=" + url)).json();
     startPlayingUI(oembed.thumbnail_url, function () {
+        new Notification("NFCPlayer", {
+            body: "Tap to return"
+        });
         location.href = uriToOpen
         enablePlayButton(function () {
             if (playing) {
@@ -97,10 +101,33 @@ async function playSpotify(url) {
             }
             pauseUI(playing)
         })
-        setTimeout(function () {
-            new Notification("NFCPlayer", {
-                body: "Tap to return"
-            });
+    })
+}
+
+async function playSpotify(url) {
+    var uriToOpen = toSpotifyURI(url)
+    if (!uriToOpen) {
+        alert("Invalid Spotify URL")
+        return;
+    }
+    var oembed = await(await fetch("https://open.spotify.com/oembed?url=" + url)).json();
+    spotp.loadEntity(uriToOpen);
+    startPlayingUI(oembed.thumbnail_url, function () {
+        spotp.play()
+        enablePlayButton(function () {
+            spotp.togglePlay()
+            pauseUI(playing)
         })
     })
 }
+
+window.onSpotifyIframeApiReady = (IFrameAPI) => {
+    var element = document.getElementById('spotplayer');
+    var options = {};
+    var callback = (EmbedController) => {
+        spotp = EmbedController;
+        console.log(EmbedController)
+    };
+    IFrameAPI.createController(element, options, callback);
+};
+
