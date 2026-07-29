@@ -49,9 +49,21 @@ function loadYTPlayer(url) {
         }
         startPlayingUI(`http://img.youtube.com/vi/${videoId}/maxresdefault.jpg`, function () {
             ytp.playVideo()
+            enablePlayButton(ytToggle)
         })
         ytp.pauseVideo()
     }
+}
+
+function ytToggle() {
+    if (ytp.getPlayerState() === 1) {
+        ytp.pauseVideo()
+        console.log("pausing")
+    } else {
+        ytp.playVideo()
+        console.log("playing")
+    }
+    pauseUI(ytp.getPlayerState() === 1)
 }
 
 function onPlayerReady(event) {
@@ -59,33 +71,26 @@ function onPlayerReady(event) {
     console.log(videoId)
     startPlayingUI(`http://img.youtube.com/vi/${videoId}/maxresdefault.jpg`, function () {
         event.target.playVideo()
+        enablePlayButton(ytToggle)
     })
     if (event.target.playerInfo.playlistId) {
         toggleSeekButtons(function () { event.target.previousVideo() }, function () { event.target.nextVideo() })
     }
-    enablePlayButton(function () {
-        if (playing) {
-            event.target.pauseVideo()
-            console.log("pausing")
-        } else {
-            event.target.playVideo()
-            console.log("playing")
-        }
-        pauseUI(event.target.getPlayerState() === 1)
-    })
 }
 
 function toSpotifyURI(url) {
     if (url.includes("spotify.com/")) {
         var parts = url.split("spotify.com/")[1].split("/")
-        return "spotify:" + parts[0] + ":" + parts[1].split("?")[0] + ":play";
+        parts[1] = parts[1].split("?")[0]
+        return parts;
     } else {
         return null;
     }
 }
 
 async function playSpotify(url) {
-    var uriToOpen = toSpotifyURI(url)
+    var parts = toSpotifyURI(url)
+    var uriToOpen = "spotify:" + parts[0] + ":" + parts[1] + ":play"
     if (!uriToOpen) {
         alert("Invalid Spotify URL")
         return;
@@ -111,4 +116,3 @@ async function playSpotify(url) {
         })
     })
 }
-
