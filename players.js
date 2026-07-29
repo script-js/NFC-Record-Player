@@ -1,5 +1,5 @@
 var ytp;
-var spotp;
+var spot;
 
 function loadYTPlayer(url) {
     var urlParams = new URLSearchParams(url.split("youtu")[1].replace("be.com", "").replace(".be/", "/watch?v=").replace("/watch", ""));
@@ -18,7 +18,13 @@ function loadYTPlayer(url) {
             events: {
                 'onReady': onPlayerReady,
                 'onError': () => { window.open(url) },
-                'onStateChange': function (state) { if (state == YT.PlayerState.PLAYING) { record.style.backgroundImage = 'url("http://img.youtube.com/vi/' + ytp.getVideoData().video_id + '/maxresdefault.jpg")' } }
+                'onStateChange': function (state) {
+                    if (state == YT.PlayerState.PLAYING) {
+                        record.style.backgroundImage = 'url("http://img.youtube.com/vi/' + ytp.getVideoData().video_id + '/maxresdefault.jpg")'
+                    } else if (state == YT.PlayerState.ENDED) {
+                        stopPlayingUI()
+                    }
+                }
             }
         }
         if (list) {
@@ -60,8 +66,10 @@ function onPlayerReady(event) {
     enablePlayButton(function () {
         if (playing) {
             event.target.pauseVideo()
+            console.log("pausing")
         } else {
             event.target.playVideo()
+            console.log("playing")
         }
         pauseUI(event.target.getPlayerState() === 1)
     })
