@@ -1,5 +1,4 @@
 var ytp;
-var spot;
 
 function loadYTPlayer(url) {
     var urlParams = new URLSearchParams(url.split("youtu")[1].replace("be.com", "").replace(".be/", "/watch?v=").replace("/watch", ""));
@@ -19,9 +18,11 @@ function loadYTPlayer(url) {
                 'onReady': onPlayerReady,
                 'onError': () => { window.open(url) },
                 'onStateChange': function (state) {
+                    console.log(state, YT.PlayerState.ENDED)
                     if (state == YT.PlayerState.PLAYING) {
                         record.style.backgroundImage = 'url("http://img.youtube.com/vi/' + ytp.getVideoData().video_id + '/maxresdefault.jpg")'
                     } else if (state == YT.PlayerState.ENDED) {
+                        console.log("stopped")
                         stopPlayingUI()
                     }
                 }
