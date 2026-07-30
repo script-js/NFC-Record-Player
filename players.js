@@ -9,12 +9,13 @@ function loadYTPlayer(url) {
     if (list && list.includes("?")) { list = list.split("?")[0] }
     console.log(videoId, list)
     if (!ytp) {
+        console.log("creating player")
         var playerConfig = {
             height: '1',
             width: '1',
             playerVars: {
                 playsInline: 1,
-                autoplay: 0
+                autoplay: 1
             },
             events: {
                 'onReady': onPlayerReady,
@@ -39,18 +40,19 @@ function loadYTPlayer(url) {
         }
         ytp = new YT.Player('ytplayer', playerConfig);
     } else {
-        if (list) {
-            ytp.loadPlaylist({
-                listType: 'playlist',
-                list,
-                index: 0
-            });
-            toggleSeekButtons(ytp.previousVideo, ytp.nextVideo)
-        } else {
-            ytp.loadVideoById({ videoId })
-            toggleSeekButtons()
-        }
-        startPlayingUI(`http://img.youtube.com/vi/${ytp.getVideoData().video_id}/maxresdefault.jpg`, function () {
+        console.log("loading new video")
+        startPlayingUI(`https://img.youtube.coms/vi/${ytp.getVideoData().video_id}/maxresdefault.jpg`, function () {
+            if (list) {
+                ytp.loadPlaylist({
+                    listType: 'playlist',
+                    list,
+                    index: 0
+                });
+                toggleSeekButtons(ytp.previousVideo, ytp.nextVideo)
+            } else {
+                ytp.loadVideoById({ videoId })
+                toggleSeekButtons()
+            }
             ytp.playVideo()
             enablePlayButton(ytToggle)
         })
@@ -65,7 +67,8 @@ function ytToggle() {
 function onPlayerReady(event) {
     var videoId = event.target.getVideoData().video_id
     console.log(videoId)
-    startPlayingUI(`http://img.youtube.com/vi/${videoId}/maxresdefault.jpg`, function () {
+    event.target.pauseVideo()
+    startPlayingUI(`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`, function () {
         event.target.playVideo()
         enablePlayButton(ytToggle)
     })
@@ -105,7 +108,7 @@ async function playSpotify(url) {
 
 function loadSoundcloudPlayer(url) {
     scp = SC.Widget("scplayer");
-    scp.load(url.replace("m.",""))
+    scp.load(url.replace("m.", ""))
     scp.bind(SC.Widget.Events.READY, () => {
         scp.getCurrentSound((soundData) => {
             if (soundData && soundData.artwork_url) {

@@ -43,6 +43,7 @@ async function startReader() {
                             startPlayingUI("https://s2.googleusercontent.com/s2/favicons?sz=256&domain_url=" + tagjson.uri, function () {
                                 window.open(tagjson.uri)
                             })
+                            toggleSeekButtons()
                             playbtn.disabled = true
                             break;
                         case "youtube":
@@ -52,6 +53,7 @@ async function startReader() {
                             startPlayingUI(null, function () {
                                 console.log(fetch(tagjson.uri))
                             })
+                            toggleSeekButtons()
                             playbtn.disabled = true
                             break;
                         case "spotify":
@@ -64,6 +66,7 @@ async function startReader() {
                             invalidTag()
                             break;
                     }
+                    console.log("abc",textData)
                     currentTag = textData
                 } else {
                     invalidTag()
