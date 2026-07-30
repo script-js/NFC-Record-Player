@@ -46,18 +46,20 @@ function loadYTPlayer(url) {
         } else {
             var thumb;
         }
+        if (list) {
+            console.log(list)
+            ytp.loadPlaylist({
+                listType: 'playlist',
+                list,
+                index: 0
+            });
+            toggleSeekButtons(ytp.previousVideo, ytp.nextVideo)
+        } else {
+            console.log(videoId)
+            ytp.loadVideoById({ videoId })
+            toggleSeekButtons()
+        }
         startPlayingUI(thumb, function () {
-            if (list) {
-                ytp.loadPlaylist({
-                    listType: 'playlist',
-                    list,
-                    index: 0
-                });
-                toggleSeekButtons(ytp.previousVideo, ytp.nextVideo)
-            } else {
-                ytp.loadVideoById({ videoId })
-                toggleSeekButtons()
-            }
             ytp.playVideo()
             enablePlayButton(ytToggle)
         })
