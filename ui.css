@@ -100,9 +100,8 @@ button,select,input {
 
 .display {
     width: 70%;
-    height: 10%;
     font-family: 'Digital','Courier New', Courier, monospace;
-    padding: 1%;
+    padding: 2%;
     font-size: 1.5em;
     margin: auto;
     border-radius: 5px;
