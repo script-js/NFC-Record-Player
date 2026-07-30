@@ -15,7 +15,7 @@ function loadYTPlayer(url) {
             width: '1',
             playerVars: {
                 playsInline: 1,
-                autoplay: 1
+                autoplay: 0
             },
             events: {
                 'onReady': onPlayerReady,
@@ -48,7 +48,7 @@ function loadYTPlayer(url) {
         }
         if (list) {
             console.log(list)
-            ytp.loadPlaylist({
+            ytp.cuePlaylist({
                 listType: 'playlist',
                 list,
                 index: 0
@@ -56,14 +56,13 @@ function loadYTPlayer(url) {
             toggleSeekButtons(ytp.previousVideo, ytp.nextVideo)
         } else {
             console.log(videoId)
-            ytp.loadVideoById({ videoId })
+            ytp.cueVideoById({ videoId })
             toggleSeekButtons()
         }
         startPlayingUI(thumb, function () {
             ytp.playVideo()
             enablePlayButton(ytToggle)
         })
-        ytp.pauseVideo()
     }
 }
 

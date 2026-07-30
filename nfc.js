@@ -66,7 +66,6 @@ async function startReader() {
                             invalidTag()
                             break;
                     }
-                    console.log("abc",textData)
                     currentTag = textData
                 } else {
                     invalidTag()
