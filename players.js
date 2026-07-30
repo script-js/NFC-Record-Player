@@ -104,7 +104,7 @@ async function playSpotify(url) {
 
 function loadSoundcloudPlayer(url) {
     scp = SC.Widget("scplayer");
-    scp.load(url)
+    scp.load(url.replace("m.",""))
     scp.bind(SC.Widget.Events.READY, () => {
         scp.getCurrentSound((soundData) => {
             if (soundData && soundData.artwork_url) {
