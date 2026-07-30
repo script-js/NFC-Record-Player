@@ -81,7 +81,8 @@ function writeTag(provider, uri) {
         return;
     }
     if (uri.includes("on.soundcloud")) {
-        alert("Warning: on.soundcloud.com links don't work. Please open the url in another tab, wait for it to load, and then copy the soundcloud.com URL it redirects to.")
+        alert("Warning: on.soundcloud.com links don't work. When the opened page loads, copy the soundcloud.com URL it redirects to from your address bar.")
+        window.open(uri)
         return;
     }
     var text = "NFCRECORDPLAYER:" + JSON.stringify({ provider, uri })
