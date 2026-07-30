@@ -98,7 +98,7 @@ button,select,input {
     height: 70%;
 }
 
-#display {
+.display {
     width: 70%;
     font-family: 'Digital','Courier New', Courier, monospace;
     padding: 3px;
@@ -152,4 +152,8 @@ select,input {
 
 .seekBtn:disabled {
     visibility: hidden;
+}
+
+#scplayer {
+    display: none;
 }

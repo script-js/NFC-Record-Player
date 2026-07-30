@@ -12,6 +12,8 @@ function startPlayingUI(cover, playCommand) {
         playing = true;
         if (cover) {
             record.style.backgroundImage = 'url("' + cover + '")'
+        } else {
+            record.style.backgroundImage = ""
         }
         setTimeout(function () {
             navigator.vibrate(500);

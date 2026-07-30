@@ -57,6 +57,9 @@ async function startReader() {
                         case "spotify":
                             playSpotify(tagjson.uri)
                             break;
+                        case "soundcloud":
+                            loadSoundcloudPlayer(tagjson.uri)
+                            break;
                         default:
                             invalidTag()
                             break;

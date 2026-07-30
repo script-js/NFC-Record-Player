@@ -21,10 +21,13 @@
     <div id="popup">
         <h2>Write New Tag</h2>
         <h3>Music Source: <select id="provider">
-                <option value="YouTube">YouTube (recommended)</option>
-                <option>Spotify</option>
-                <option>Link</option>
-                <option>HTTP GET Request</option>
+                <optgroup label="Recommended">
+                    <option>YouTube</option>
+                    <option>SoundCloud</option>
+                </optgroup>
+            <option>Spotify</option>
+            <option>Link</option>
+            <option>HTTP GET Request</option>
             </select></h3>
         <h3>Link: <input id="link"></h3>
         <button onclick="hidePopup()">Close</button>
@@ -40,7 +43,10 @@
         <div id="arm"></div>
     </div>
     <div class="controlsContainer">
-        <div id="display">OFF</div>
+        <div class="display"><span id="display">OFF</span><br>
+            <iframe width="99%" height="40" id="scplayer" src="https://w.soundcloud.com/player/?url=" scrolling="no"
+                frameborder="no" allow="autoplay"></iframe>
+        </div>
         <div id="controls"><button class="powerbtn" onclick="powerOn(this)"
                 ontouchstart="clickFeedback()">Power</button><button ontouchstart="clickFeedback(this)"
                 ontouchend="clickFeedback(this)" onclick="showPopup()" disabled id="writebtn">Write
@@ -52,7 +58,6 @@
     </div>
     <div id="ytplayer"></div>
     <div id="spotplayer"></div>
-    <iframe width="0" height="0" id="scplayer" src="https://w.soundcloud.com/player/?url="></iframe>
     <audio src="clicksound.mp3" id="click"></audio>
     <audio src="silence.mp3" id="interruptor" loop></audio>
 </body>

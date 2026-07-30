@@ -105,11 +105,42 @@ async function playSpotify(url) {
 function loadSoundcloudPlayer(url) {
     scp = SC.Widget("scplayer");
     scp.load(url)
-    startPlayingUI(``, function () {
-        scp.play()
-        enablePlayButton(function() {
-            pauseUI(!scp.isPaused(), function() {scp.play()}, function() {scp.pause()})
-        })
-        toggleSeekButtons(function() {scp.prev()}, function() {scp.next()})
-    })
+    scp.bind(SC.Widget.Events.READY, () => {
+        scp.getCurrentSound((soundData) => {
+            if (soundData && soundData.artwork_url) {
+                var highResArt = soundData.artwork_url.replace('-large.', '-t500x500.');
+                console.log('Album Cover URL:', highResArt);
+            } else {
+                console.log('No artwork found for this playlist.');
+            }
+            startPlayingUI(highResArt, function () {
+                scp.play()
+                enablePlayButton(function () {
+                    scp.isPaused(function (r) {
+                        pauseUI(!r, function () { scp.play() }, function () { scp.pause() })
+                    })
+                })
+                toggleSeekButtons(function () {
+                    scp.prev()
+                    scp.seekTo(0)
+                }, function () {
+                    scp.seekTo(0)
+                    scp.next()
+                })
+                scp.bind(SC.Widget.Events.PLAY, function () {
+                    scplayer.style.display = 'none'
+                    display.innerText = "PLAY"
+                })
+
+                setTimeout(function () {
+                    scp.isPaused(function (r) {
+                        if (!r) {
+                            scplayer.style.display = "inline"
+                            display.innerText = "PRESS ORANGE BUTTON"
+                        }
+                    })
+                }, 500)
+            })
+        });
+    });
 }
