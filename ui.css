@@ -99,10 +99,9 @@ button,select,input {
 }
 
 #display {
-    height: 10%;
     width: 70%;
     font-family: 'Digital','Courier New', Courier, monospace;
-    padding: 5px;
+    padding: 3px;
     font-size: 23px;
     margin: auto;
     border-radius: 5px;
