@@ -41,7 +41,12 @@ function loadYTPlayer(url) {
         ytp = new YT.Player('ytplayer', playerConfig);
     } else {
         console.log("loading new video")
-        startPlayingUI(`https://img.youtube.coms/vi/${ytp.getVideoData().video_id}/maxresdefault.jpg`, function () {
+        if (videoId) {
+            var thumb = `https://img.youtube.coms/vi/${videoId}/maxresdefault.jpg`
+        } else {
+            var thumb;
+        }
+        startPlayingUI(thumb, function () {
             if (list) {
                 ytp.loadPlaylist({
                     listType: 'playlist',
