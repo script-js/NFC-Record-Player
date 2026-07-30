@@ -101,8 +101,8 @@ button,select,input {
 .display {
     width: 70%;
     font-family: 'Digital','Courier New', Courier, monospace;
-    padding: 3px;
-    font-size: 23px;
+    padding: 1%;
+    font-size: 1.5em;
     margin: auto;
     border-radius: 5px;
     outline: 3px solid black;
