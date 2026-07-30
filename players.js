@@ -41,8 +41,9 @@ function loadYTPlayer(url) {
         ytp = new YT.Player('ytplayer', playerConfig);
     } else {
         console.log("loading new video")
+        ytp.stopVideo()
         if (videoId) {
-            var thumb = `https://img.youtube.coms/vi/${videoId}/maxresdefault.jpg`
+            var thumb = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
         } else {
             var thumb;
         }
