@@ -54,7 +54,7 @@ function loadYTPlayer(url) {
                 list,
                 index: 0
             });
-            toggleSeekButtons(ytp.previousVideo, ytp.nextVideo)
+            toggleSeekButtons(function () { ytp.previousVideo() }, function () { ytp.nextVideo() })
         } else {
             console.log(videoId)
             ytp.cueVideoById({ videoId })
