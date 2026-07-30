@@ -73,6 +73,10 @@ async function startReader() {
 }
 
 function writeTag(provider, uri) {
+    if (provider == "spotifyapp") {
+        writeSpotifyURI(uri)
+        return;
+    }
     var text = "NFCRECORDPLAYER:" + JSON.stringify({ provider, uri })
     writing = true;
     display.innerText = "WRITING"
@@ -88,4 +92,32 @@ function writeTag(provider, uri) {
         }
     }, { once: true });
     alert("Ready to write\n Hold NFC tag on the back of the device")
+}
+
+function writeSpotifyURI(url) {
+    if (confirm("Note: The tag written by the Spotify App option will not work with this website and will show an invalid tag error if scanned from here. Instead, it directly opens the Spotify app and starts playback. This is the recommended way to play Spotify with NFC tags, but you will not be able to use the NFC Player UI.")) {
+        writing = true;
+        var parts = toSpotifyURI(url)
+        var uri = "spotify:" + parts[0] + ":" + parts[1] + ":play"
+        display.innerText = "WRITING"
+        ndef.addEventListener("reading", async function (message, serialNumber) {
+            console.log("Writing " + uri)
+            await ndef.write({
+                records: [
+                    {
+                        recordType: "url",
+                        data: uri
+                    }
+                ]
+            })
+            alert("Write Complete")
+            writing = false;
+            if (playing) {
+                display.innerText = "PLAY"
+            } else {
+                display.innerText = "WRITE COMPLETE"
+            }
+        }, { once: true });
+        alert("Ready to write\n Hold NFC tag on the back of the device")
+    }
 }

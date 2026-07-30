@@ -73,16 +73,6 @@ function onPlayerReady(event) {
     }
 }
 
-function toSpotifyURI(url) {
-    if (url.includes("spotify.com/")) {
-        var parts = url.split("spotify.com/")[1].split("/")
-        parts[1] = parts[1].split("?")[0]
-        return parts;
-    } else {
-        return null;
-    }
-}
-
 async function playSpotify(url) {
     var parts = toSpotifyURI(url)
     var uriToOpen = "spotify:" + parts[0] + ":" + parts[1] + ":play"
