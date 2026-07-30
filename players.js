@@ -13,17 +13,18 @@ function loadYTPlayer(url) {
             height: '1',
             width: '1',
             playerVars: {
-                playsInline: 1
+                playsInline: 1,
+                autoplay: 0
             },
             events: {
                 'onReady': onPlayerReady,
                 'onError': () => { window.open(url) },
                 'onStateChange': function (event) {
                     var state = event.data
+                    console.log(state)
                     if (state == YT.PlayerState.PLAYING) {
                         record.style.backgroundImage = 'url("https://img.youtube.com/vi/' + ytp.getVideoData().video_id + '/maxresdefault.jpg")'
                     } else if (state == YT.PlayerState.ENDED) {
-                        console.log("stopped")
                         stopPlayingUI()
                     }
                 }
@@ -49,7 +50,7 @@ function loadYTPlayer(url) {
             ytp.loadVideoById({ videoId })
             toggleSeekButtons()
         }
-        startPlayingUI(`http://img.youtube.com/vi/${videoId}/maxresdefault.jpg`, function () {
+        startPlayingUI(`http://img.youtube.com/vi/${ytp.getVideoData().video_id}/maxresdefault.jpg`, function () {
             ytp.playVideo()
             enablePlayButton(ytToggle)
         })
